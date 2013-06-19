@@ -1,0 +1,123 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class='no-js lt-ie9 lt-ie8 lt-ie7'> <![endif]-->
+<!--[if IE 7]>         <html class='no-js lt-ie9 lt-ie8'> <![endif]-->
+<!--[if IE 8]>         <html class='no-js lt-ie9'> <![endif]-->
+<!--[if gt IE 8]><!--> <html class='no-js'> <!--<![endif]-->
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+		<title></title>
+		<meta name='description' content=''>
+		<meta name='viewport' content='width=device-width'>
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel='stylesheet' href='styles/main.css'>
+		<!-- build:js scripts/vendor/modernizr.js -->
+		<script src='bower_components/modernizr/modernizr.js'></script>
+		<!-- endbuild -->
+	</head>
+	<body>
+		<div class='container'>
+			<div class='hero-unit'></div>
+		</div>
+
+		<!--[if lt IE 7]>
+			<p class='chromeframe'>You are using an <strong>outdated</strong> browser. Please <a href='http://browsehappy.com/'>upgrade your browser</a> or <a href='http://www.google.com/chromeframe/?redirect=true'>activate Google Chrome Frame</a> to improve your experience.</p>
+		<![endif]-->
+
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<!--script>
+			var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script-->
+
+		<script id='launchPageTemplate' type='text/template'>
+			<div class='launchButtons btn-group btn-group-vertical'>
+				<button class='scan btn'>Scan</button>
+				<button class='lookUp btn'>Enter device number</button>
+				<button class='browse btn'>Browse</button>
+			</div>
+		</script>
+
+		<script id='scanPageTemplate' type='text/template'>
+			<span>Placeholder for the camera barcode scanning feature</span>
+		</script>
+
+		<script id='lookUpPageTemplate' type='text/template'>
+			<div class='pull-right'>
+				<input type="text" class="span5" placeholder="Enter device number">
+				<button class="submitLookUp btn">Look Up</button>
+			</div>
+		</script>
+
+		<script id='browsePageTemplate' type='text/template'>
+			<div class='browseButtons btn-group btn-group-vertical'>
+				<button class='devicesList btn'>Devices</button>
+				<button class='departmentsList btn'>Departments</button>
+			</div>
+		</script>
+
+		<script id='listPageTemplate' type='text/template'>
+			<div class='listButtons btn-group btn-group-vertical'>
+				<% _.each( listElements, function( element ) {
+					if( this.subText ) { %>
+						<button class='<%= this.listType %> btn<% if( element.expires ) { %> expired<% } %><% if( element.lost ) { %> lost<% } %>'>
+							<%= element.showAttribute %>
+							<span class='subText'>
+								<span class='serial'><%= element.subText %></span>
+								<% if( element.expires ) { %>
+								<span class='divider'>|</span>
+								<span class='expiredMessage'>Expired <%= element.expires %></span>
+								<% } %>
+								<% if( element.lost ) { %>
+								<span class='divider'>|</span>
+								<span class='lostMessage'>Device lost</span>
+								<% } %>
+							</span>
+						</button>
+					<% } else %>
+						<button class='<%= this.listType %> btn'><%= element %></button>
+				<% }, this ); %>
+			</div>
+		</script>
+
+		<script id='devicePageTemplate' type='text/template'>
+			<div class='deviceHeader'>
+				<div class='deviceModel centered uneditable'><%= model.get( 'device' ) %></div>
+				<% if( expired ) { %>
+				<div class='deviceExpires centered expired bold'>Expired <%= expired %></div>
+				<% } else { %>
+				<div class='deviceExpires centered'>Expires <%= expires %></div>
+				<% } %>
+				<% if( model.get( 'lost' ) ) { %>
+				<div class='deviceLost centered'>This device has been lost</div>
+				<% } %>
+			</div>
+			<div class='deviceSerial deviceElement'>
+				<span class='deviceAttributeLabel span6'>Serial number:</span>
+				<span class='deviceAttribute'><%= model.get( 'serial' ) %></span>
+			</div>
+			<div class='deviceType deviceElement'>
+				<span class='deviceAttributeLabel span6'>Device type:</span>
+				<span class='deviceAttribute editable'><%= model.get( 'type' ) %></span>
+			</div>
+			<div class='deviceOwner deviceElement'>
+				<span class='deviceAttributeLabel span6'>Owner:</span>
+				<span class='deviceAttribute editable'><%= model.get( 'owner' ) %></span>
+			</div>
+			<div class='deviceAssigned deviceElement'>
+				<span class='deviceAttributeLabel span6'>Assigned:</span>
+				<span class='deviceAttribute'><%= model.get( 'assigned' ).format('MMMM Do YYYY') %></span>
+			</div>
+			<div class='deviceExpires deviceElement'>
+				<span class='deviceAttributeLabel span6'><% if( expired ) { %>Expired:<% } else { %>Expires:<% } %></span>
+				<span class='deviceAttribute'><%= model.get( 'expires' ).format('MMMM Do YYYY') %></span>
+			</div>
+		</script>
+
+		<!-- build:js scripts/main.js -->
+		<script data-main='scripts/main' src='bower_components/requirejs/require.js'></script>
+		<!-- endbuild -->
+</body>
+</html>

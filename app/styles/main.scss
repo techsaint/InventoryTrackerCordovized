@@ -1,0 +1,88 @@
+@import 'sass-bootstrap/lib/bootstrap';
+
+.hidden {
+	display: none;
+}
+
+.centered {
+	text-align: center;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.hero-unit {
+	margin: 50px auto 50px auto;
+	min-width: 640px;
+	min-height: 940px;
+}
+
+.launchButtons,
+.browseButtons,
+.listButtons {
+	width: 100%
+}
+
+.launchButtons > .btn,
+.browseButtons > .btn,
+.listButtons > .btn {
+	width: 100%;
+	height: 80px;
+	font-size: 22px;
+	color: hsl(0, 0%, 51%);
+}
+
+.subText {
+	display: block;
+	font-size: .7em;
+	color: grey;
+}
+
+.divider {
+	margin: 0 10px;
+	font-weight: bold;
+}
+
+.expired,
+.expired:hover,
+.expired:focus,
+.expired > .subText,
+.lost,
+.lost:hover,
+.lost:focus,
+.lost > .subText {
+	color: hsl(0, 100%, 71%);
+}
+
+.asset.expired,
+.asset.lost {
+	color: hsl(0, 100%, 71%);
+}
+
+.deviceHeader {
+	color: hsl(0, 0%, 30%);
+}
+
+.deviceModel {
+	font-weight: bold;
+	font-size: 2.5em;
+	margin-bottom: .5em;
+}
+
+.deviceLost {
+	color: hsl(0, 100%, 71%);
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.deviceElement:first-of-type {
+	margin-top: 40px;
+}
+
+.deviceElement {
+	margin-top: 20px;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: hsl(0, 1%, 61%);
+}
